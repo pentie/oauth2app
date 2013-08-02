@@ -3,7 +3,8 @@
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
-from uni_form.helpers import FormHelper, Submit, Reset
+from uni_form.helper import FormHelper
+from uni_form.layout import Submit, Reset
 
 
 class CreateClientForm(forms.Form):
@@ -49,6 +50,7 @@ class LoginForm(forms.Form):
 
     username = forms.CharField(label="Username", max_length=30)
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
+    next_to = forms.CharField(label="Next", widget=forms.HiddenInput, max_length=512, required=False)
 
     @property
     def helper(self):

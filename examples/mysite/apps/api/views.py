@@ -35,3 +35,16 @@ def email(request):
     except AuthenticationException:
         return authenticator.error_response()
     return authenticator.response({"email": authenticator.user.email})
+
+
+def profile(request):
+    authenticator = JSONAuthenticator()
+    try:
+        authenticator.validate(request)
+    except AuthenticationException:
+        return authenticator.error_response()
+    return authenticator.response(
+                {"email": authenticator.user.email,
+                 "id": authenticator.user.username })
+
+

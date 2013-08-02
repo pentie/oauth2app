@@ -6,7 +6,8 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
-from uni_form.helpers import FormHelper, Submit
+from uni_form.helper import FormHelper
+from uni_form.layout import Submit
 
 from oauth2app.authorize import Authorizer, MissingRedirectURI, AuthorizationException
 from .forms import AuthorizeForm

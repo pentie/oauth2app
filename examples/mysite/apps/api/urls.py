@@ -4,5 +4,6 @@ from django.conf.urls.defaults import patterns
 urlpatterns = patterns('mysite.apps.api.views',
     (r'^date_joined/?$', 'date_joined'),
     (r'^last_login/?$', 'last_login'),
-    (r'^email/?$', 'email')
+    (r'^email/?$', 'email'),
+    (r'^profile/?$', 'profile')
 )

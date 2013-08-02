@@ -38,9 +38,17 @@ def login(request):
                     username=form.cleaned_data["username"],
                     password=form.cleaned_data["password"])
             auth.login(request, user)
+            next_to = request.POST.get('next_to')
+            if next_to is not None and len(next_to) > 0:
+                return HttpResponseRedirect(next_to)
             return HttpResponseRedirect("/")
     else:
-        form = LoginForm()
+        next_to = request.GET.get('next')
+        if next_to is not None and len(next_to) > 0:
+            form = LoginForm(initial={'next_to':next_to})
+        else:
+            form = LoginForm()
+
     template = {"form": form}
     return render_to_response('account/login.html', template, RequestContext(request))
 
