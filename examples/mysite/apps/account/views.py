@@ -47,6 +47,8 @@ def login(request):
     else:
         next_to = request.GET.get('next')
         if next_to is not None and len(next_to) > 0:
+            if not next_to.startswith('/'):
+                next_to = next_to[next_to.find('/'):]
             request.session['next_to'] = next_to
         form = LoginForm()
 
