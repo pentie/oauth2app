@@ -45,6 +45,8 @@ def profile(request):
         return authenticator.error_response()
     return authenticator.response(
                 {"email": authenticator.user.email,
-                 "id": authenticator.user.username })
-
+                 "id": authenticator.user.id,
+                 "name": authenticator.user.username,
+                 "login": authenticator.user.username 
+                })
 
