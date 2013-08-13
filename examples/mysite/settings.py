@@ -1,6 +1,13 @@
 # Django settings for oauth2app example mysite project.
 
 import os
+import sys
+
+try:
+    import oauth2app
+except ImportError:
+    sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), '../..')))
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

@@ -38,16 +38,19 @@ def login(request):
                     username=form.cleaned_data["username"],
                     password=form.cleaned_data["password"])
             auth.login(request, user)
-            next_to = request.POST.get('next_to')
+
+            next_to = request.session.get('next_to', None)
             if next_to is not None and len(next_to) > 0:
+                del request.session['next_to']
                 return HttpResponseRedirect(next_to)
             return HttpResponseRedirect("/")
     else:
         next_to = request.GET.get('next')
         if next_to is not None and len(next_to) > 0:
-            form = LoginForm(initial={'next_to':next_to})
-        else:
-            form = LoginForm()
+            if not next_to.startswith('/'):
+                next_to = next_to[next_to.find('/'):]
+            request.session['next_to'] = next_to
+        form = LoginForm()
 
     template = {"form": form}
     return render_to_response('account/login.html', template, RequestContext(request))
@@ -71,6 +74,12 @@ def signup(request):
                     username=form.cleaned_data["username"],
                     password=form.cleaned_data["password1"])
             auth.login(request, user)
+
+            next_to = request.session.get('next_to', None)
+            if next_to is not None and len(next_to) > 0:
+                del request.session['next_to']
+                return HttpResponseRedirect(next_to)
+
             return HttpResponseRedirect("/")
     else:
         form = SignupForm()

@@ -50,7 +50,6 @@ class LoginForm(forms.Form):
 
     username = forms.CharField(label="Username", max_length=30)
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
-    next_to = forms.CharField(label="Next", widget=forms.HiddenInput, max_length=512, required=False)
 
     @property
     def helper(self):
